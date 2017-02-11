@@ -1,6 +1,6 @@
 console.log('THIS IS ILIGROWTH.JS')	  
 	  
-	  var outerWidth = 1000;
+	  var outerWidth = 900;
       var outerHeight = 400;
       var border = 1;
       var bordercolor = 'black';
@@ -16,7 +16,7 @@ console.log('THIS IS ILIGROWTH.JS')
       var xAxisLabelOffset = 48;
 
       var yAxisLabelText = "Peak Depth (%)";
-      var yAxisLabelOffset = 50;
+      var yAxisLabelOffset = 42;
 
       var innerWidth  = outerWidth  - margin.left - margin.right;
       var innerHeight = outerHeight - margin.top  - margin.bottom;
@@ -61,11 +61,11 @@ console.log('THIS IS ILIGROWTH.JS')
 
       var xAxis = d3.svg.axis().scale(xScale).orient("bottom")
         .ticks(5)
-        .tickFormat(d3.format("s"))
+        .tickFormat(d3.format("r"))
         .outerTickSize(0);
       var yAxis = d3.svg.axis().scale(yScale).orient("left")
         .ticks(5)
-        .tickFormat(d3.format("s"))
+        .tickFormat(d3.format(".0%"))
         .outerTickSize(0);
 
       function render(data){
@@ -96,3 +96,4 @@ console.log('THIS IS ILIGROWTH.JS')
       }
 
       d3.csv("ILI_Data_Sample.csv", type, render);
+      

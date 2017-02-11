@@ -64,14 +64,20 @@
 					<div class="box-top">DEMO SCATTERPLOT</div>
 					<div class="box-panel-growth">
 						<script type="text/javascript" src="/iligrowth.js"></script>
+					     <script> 
+	d3.csv("ILI_Data_Sample.csv", function (myArrayOfObjects){
+        myArrayOfObjects.forEach(function (d){
+          console.log(d.MAX_DEPTH_PCT);
+        });
+        });
+        </script>
 					</div>
 			</div>
 			
 			<div id="box">
 					<div class="box-top">The standard Lorem Ipsum passage, used since the 1500s</div>
 					<div class="box-panel">
-						<!--<script type="text/javascript" src="/iris.js"></script>-->
-									
+						<!--<script type="text/javascript" src="/demoiris.js"></script>-->
 					</div>
 
 	</div>
