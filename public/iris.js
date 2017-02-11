@@ -226,7 +226,7 @@ console.log("HELLO D3");
       d3.csv("iris.csv", type, render);
 */
 //example 106 scatterplot axes and labels
-  var outerWidth = 300;
+ 	  var outerWidth = 300;
       var outerHeight = 250;
       var margin = { left: 60, top: 5, right: 5, bottom: 60 };
       var rMin = 1; // "r" stands for radius
@@ -245,7 +245,7 @@ console.log("HELLO D3");
       var innerWidth  = outerWidth  - margin.left - margin.right;
       var innerHeight = outerHeight - margin.top  - margin.bottom;
 
-      var svg = d3.select("body").append("svg")
+      var svg = d3.select(".box-panel").append("svg")
         .attr("width", outerWidth)
         .attr("height", outerHeight);
       var g = svg.append("g")

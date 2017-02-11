@@ -121,12 +121,13 @@ div#box .box-top {
     display: flex;
  }
  
-  div#box .box-panelsvg {
+  div#box .box-panel-growth {
  	padding: 30px;
  	background-color: #fff;
 	display: -webkit-flex;
     display: flex;
  }
+
 
 /* scatterplot */
  h2 {
@@ -141,13 +142,13 @@ div#box .box-top {
      text-transform: uppercase;
  }
 
-/*circle {
+circle {
     stroke: #1abc9c;
-    stroke-width: 2;
+    stroke-width: 1;
     fill: none;
-}*/
+}
 	 .axis text {
-        font-family: 'Poiret One', cursive;
+        font-family: 'Open Sans';
         font-size: 8pt;
       }
       .axis .label {
