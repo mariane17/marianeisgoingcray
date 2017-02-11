@@ -12,3 +12,6 @@ The Node.js Starter demonstrates a simple, reusable Node.js web application base
 6. Access the running app in a browser at http://localhost:6001
 
 [Install Node.js]: https://nodejs.org/en/download/
+
+# Icon from
+Bincocular Icon made by Gregor Cresnar at www.flaticon.com and is licensed by CC 3.0 BY
