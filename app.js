@@ -26,3 +26,34 @@ app.listen(appEnv.port, '0.0.0.0', function() {
   // print a message when the server starts listening
   console.log("server starting on " + appEnv.url);
 });
+
+
+var ibmdb = require('ibm_db');
+
+global.dbConnString = "DATABASE=BLUDB;HOSTNAME=dashdb-entry-yp-dal09-07.services.dal.bluemix.net;PORT=50000;PROTOCOL=TCPIP;UID=dash11481;PWD=09ee0b8b23de;"
+
+app.get('/select', function(req, res) {
+  ibmdb.open(dbConnString, function(err, conn) {
+    if (err) {
+      console.error("Error: ", err);
+      return;
+    } else {
+      var query = "SELECT MAX_DEPTH_PCT FROM CAPSTONE_ILI_DATA_SAMPLE FETCH FIRST 2 ROWS ONLY";
+      conn.query(query, function(err, rows) {
+        if (err) {
+          console.log("Error: ", err);
+          return;
+        } else {
+          console.log(rows);
+          
+          
+          
+          conn.close(function() {
+            console.log("Connection closed successfully.");
+          });
+        }
+      });
+    }
+  });
+});
+
