@@ -46,8 +46,6 @@ app.get('/select', function(req, res) {
         } else {
           console.log(rows);
           
-          
-          
           conn.close(function() {
             console.log("Connection closed successfully.");
           });
