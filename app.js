@@ -38,18 +38,22 @@ app.get('/select', function(req, res) {
     if (err) {
       console.error("Error: ", err);
       return;
-    } else {
+    } 
       var query = "SELECT * FROM CAPSTONE_ILI_DATA_SAMPLE FETCH FIRST 5 ROWS ONLY";
       conn.query(query, function(err, rows) {
         if (err) {
           console.log("Error: ", err);
           return;
-        } else {
+        } 
        // var obj = JSON.parse(rows);
        // console.log(obj.MAX_PEAK_PCT);
        //	next();
          // console.log(rows);
-         res.send(rows); 
+         //res.send(rows); 
+         var myObj = 'tablelist', {
+                        "tablelist" : rows
+                    };
+         res.end(JSON.stringify(myObj));  
          
           conn.close(function() {
             console.log("Connection closed successfully.");
@@ -59,35 +63,4 @@ app.get('/select', function(req, res) {
     }
   });
 });
-
-app.get('/', function(req, res) {
-	ibmdb.open(dbConnString, function(err, conn) {
-    if (err) {
-      console.error("Error: ", err);
-      return;
-    } else {
-      var query = "SELECT * FROM CAPSTONE_ILI_DATA_SAMPLE FETCH FIRST 5 ROWS ONLY";
-      conn.query(query, function(err, tables, moreResultSets) {
-        if (err) {
-          console.log("Error: ", err);
-          return;
-        } else {
-       // var obj = JSON.parse(rows);
-       // console.log(obj.MAX_PEAK_PCT);
-       //	next();
-         // console.log(rows);
-         //res.send(rows); 
-         res.render('tablelist', {
-                        "tablelist" : tables
-                    });
-
-          conn.close(function() {
-            console.log("Connection closed successfully.");
-          });
-        }
-      });
-    }
-  });
-});
-
 
