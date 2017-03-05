@@ -8,7 +8,9 @@
 	<script src="scripts/mobilemenu.js"></script>
 	<script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>-->
  <script src="//d3js.org/d3.v3.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js">
+  			
+</script>
  
 
 	</head>
@@ -31,11 +33,11 @@
 			</ul>
 		</div>
 		<div class="content" ng-app='two_way' ng-controller='two_way_control'>
+		<script type="text/javascript" src="/angularapp.js"></script>
+		<script type="text/javascript" src="/angularctrl.js"></script>
 			<h1>DATA READ DEMO</h1>
-			<script type="text/javascript" src="/angularapp.js"></script>
-			<script type="text/javascript" src="/angularhttp.js"></script>
 				<div class="row" ng-repeat="data in ilidata">
-				<p>I am reading {{data.ilidata}}</p>
+				<p>I am reading {{data.MAX_DEPTH_PCT}}</p>
 				</div>
 		</div>
 
