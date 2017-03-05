@@ -45,20 +45,24 @@ app.get('/select', function(req, res) {
           console.log("Error: ", err);
           return;
         } 
+        console.log(rows);
        // var obj = JSON.parse(rows);
        // console.log(obj.MAX_PEAK_PCT);
        //	next();
          // console.log(rows);
          //res.send(rows); 
-         var myObj = 'tablelist', {
-                        "tablelist" : rows
-                    };
-         res.end(JSON.stringify(myObj));  
+         //var myObj = 'tablelist', {
+                  //      "tablelist" : rows
+                  //  };
+        // res.end(JSON.stringify(myObj));  
          
           conn.close(function() {
             console.log("Connection closed successfully.");
+          
+          
           });
-        }
+       
+       
       });
     }
   });
