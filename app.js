@@ -32,39 +32,25 @@ var ibmdb = require('ibm_db');
 
 global.dbConnString = "DATABASE=BLUDB;HOSTNAME=dashdb-entry-yp-dal09-07.services.dal.bluemix.net;PORT=50000;PROTOCOL=TCPIP;UID=dash11481;PWD=09ee0b8b23de;"
 
-
 app.get('/select', function(req, res) {
-	ibmdb.open(dbConnString, function(err, conn) {
+  ibmdb.open(dbConnString, function(err, conn) {
     if (err) {
       console.error("Error: ", err);
       return;
-    } 
-      var query = "SELECT * FROM CAPSTONE_ILI_DATA_SAMPLE FETCH FIRST 5 ROWS ONLY";
+    } else {
+      var query = "SELECT MAX_DEPTH_PCT FROM CAPSTONE_ILI_DATA_SAMPLE FETCH FIRST 2 ROWS ONLY";
       conn.query(query, function(err, rows) {
         if (err) {
           console.log("Error: ", err);
           return;
-        } 
-        console.log(rows);
-       // var obj = JSON.parse(rows);
-       // console.log(obj.MAX_PEAK_PCT);
-       //	next();
-         // console.log(rows);
-         //res.send(rows); 
-         //var myObj = 'tablelist', {
-                  //      "tablelist" : rows
-                  //  };
-        // res.end(JSON.stringify(myObj));  
-         
+        } else {
+          console.log(rows);
+          
           conn.close(function() {
             console.log("Connection closed successfully.");
-          
-          
           });
-       
-       
+        }
       });
     }
   });
 });
-
