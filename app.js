@@ -38,15 +38,16 @@ app.get('/select', function(req, res) {
       return;
     } else {
    	console.log("**********CONNECTING TO DATABASE**********");
-      var query = "SELECT MAX_DEPTH_PCT FROM CAPSTONE_ILI_DATA_SAMPLE FETCH FIRST 5 ROWS ONLY";
+      var query = "SELECT MAX_DEPTH_PCT, \"ABSOLUTE_ODOMETER_m\" FROM CAPSTONE_ILI_DATA_SAMPLE FETCH FIRST 5 ROWS ONLY";	// FETCH FIRST 5 ROWS ONLY
       conn.query(query, function(err, rows) {
         if (err) {
           console.log("Error: ", err);
           return;
         } else {
-          //console.log(rows);
+          //console.log(JSON.parse(rows));
           res.end(JSON.stringify(rows));
-          conn.close(function() {
+         
+         conn.close(function() {
             console.log("Connection closed successfully.");
           });
         }
