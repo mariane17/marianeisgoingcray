@@ -38,14 +38,14 @@ app.get('/select', function(req, res) {
       console.error("Error: ", err);
       return;
     } else {
-      var query = "SELECT MAX_DEPTH_PCT FROM CAPSTONE_ILI_DATA_SAMPLE FETCH FIRST 2 ROWS ONLY";
+   	console.log("**********CONNECTING TO DATABASE**********");
+      var query = "SELECT * FROM CAPSTONE_ILI_DATA_SAMPLE FETCH FIRST 5 ROWS ONLY";
       conn.query(query, function(err, rows) {
         if (err) {
           console.log("Error: ", err);
           return;
         } else {
           console.log(rows);
-          
           conn.close(function() {
             console.log("Connection closed successfully.");
           });
@@ -54,3 +54,4 @@ app.get('/select', function(req, res) {
     }
   });
 });
+
