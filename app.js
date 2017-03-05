@@ -13,7 +13,7 @@ var express = require('express');
 var cfenv = require('cfenv');
 
 // create a new express server
-var app = express();
+var app = express()
 
 // serve the files out of ./public as our main files
 app.use(express.static(__dirname + '/public'));
@@ -26,7 +26,6 @@ app.listen(appEnv.port, '0.0.0.0', function() {
   // print a message when the server starts listening
   console.log("server starting on " + appEnv.url);
 });
-
 
 var ibmdb = require('ibm_db');
 
@@ -45,7 +44,8 @@ app.get('/select', function(req, res) {
           console.log("Error: ", err);
           return;
         } else {
-          console.log(rows);
+          //console.log(rows);
+          res.end(JSON.stringify(rows));
           conn.close(function() {
             console.log("Connection closed successfully.");
           });
@@ -54,4 +54,11 @@ app.get('/select', function(req, res) {
     }
   });
 });
+
+
+app.get('/riskmgt',function(req,res){
+res.sendfile('riskmgt.html');
+});
+
+
 
