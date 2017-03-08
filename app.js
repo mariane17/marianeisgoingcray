@@ -56,6 +56,9 @@ app.get('/select', function(req, res) {
   });
 });
 
+app.get('/dashboard',function(req,res){
+res.sendfile('dashboard.html');
+});
 
 app.get('/riskmgt',function(req,res){
 res.sendfile('riskmgt.html');
