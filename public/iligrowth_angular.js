@@ -1,4 +1,4 @@
-console.log('THIS IS ILIGROWTH_ANGULAR.JS')	  
+console.log('THIS IS ILIGROWTH.JS')	  
 	  
 	  var outerWidth = 900;
       var outerHeight = 400;
@@ -86,14 +86,10 @@ console.log('THIS IS ILIGROWTH_ANGULAR.JS')
 
         circles.exit().remove();
       }
-
-      function type(d){
-        d.ABSOLUTE_ODOMETER_m = +d.ABSOLUTE_ODOMETER_m; //x
-        //d.sepal_width  = +d.sepal_width; 
-        d.MAX_DEPTH_PCT = +d.MAX_DEPTH_PCT; //y
-       // d.petal_width  = +d.petal_width;
+      //d3.csv("ILI_Data_Sample.csv", type, render);
+      d3.json("ILI_DATA_SAMPLE.json", function(error, data) {
+  	    d.ABSOLUTE_ODOMETER_m = +d.ABSOLUTE_ODOMETER_m; //x
+        d.MAX_DEPTH_PCT = +d.MAX_DEPTH_PCT; 
         return d;
-      }
-
-      d3.csv("ILI_Data_Sample.csv", type, render);
-      
+    });
+    
