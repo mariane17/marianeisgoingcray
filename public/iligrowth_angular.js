@@ -1,4 +1,4 @@
-console.log('THIS IS ILIGROWTH.JS')	  
+console.log('THIS IS ILIGROWTH.JS');  
 	  
 	  var outerWidth = 900;
       var outerHeight = 400;
@@ -86,10 +86,14 @@ console.log('THIS IS ILIGROWTH.JS')
 
         circles.exit().remove();
       }
-      //d3.csv("ILI_Data_Sample.csv", type, render);
-      d3.json("ILI_DATA_SAMPLE.json", function(error, data) {
-  	    d.ABSOLUTE_ODOMETER_m = +d.ABSOLUTE_ODOMETER_m; //x
+     
+      d3.json("ILI_Data_Sample.json", render, function(data){
+      	data.forEach(function(d) {
+      	d.ABSOLUTE_ODOMETER_m = +d.ABSOLUTE_ODOMETER_m; //x
         d.MAX_DEPTH_PCT = +d.MAX_DEPTH_PCT; 
-        return d;
-    });
+         	});
+         	console.log(data[0]);
+      });
+    
+    
     
