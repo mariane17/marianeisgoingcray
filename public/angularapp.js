@@ -9,3 +9,13 @@ myILI.controller('iliCtrl',function($scope,$http){	//$interval
 	}
 	)};
 });
+
+
+var myApp = angular.module('myApp',[]);
+
+myApp.controller('MainCtrl', function($scope){
+	$http.get('https://marianeisgoingcray.mybluemix.net/select').then(function(response){
+		console.log(response.data);
+	});
+
+});

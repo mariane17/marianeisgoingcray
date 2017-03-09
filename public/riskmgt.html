@@ -32,22 +32,23 @@
 				<li><a href="logout.html">Logout</a></li>
 			</ul>
 		</div>
-		<div class="content" ng-app='two_way' ng-controller='two_way_control'>
+		<div class="content" ng-app="readILI" ng-controller = "iliCtrl">
 		<script type="text/javascript" src="/angularapp.js"></script>
-		<script type="text/javascript" src="/angularctrl.js"></script>
-			<h1>DATA READ DEMO</h1>
-				<div class="row" ng-repeat="data in ilidata">
+			 <h1>DATA READ DEMO</h1>
+				<!--<div class="row" ng-repeat="data in ilidata">
 				<p>I am reading MAX DEPTH: {{data.MAX_DEPTH_PCT}} and ABSOLUTE DISTANCE: {{data.ABSOLUTE_ODOMETER_m}}</p>
-				</div>
-		</div>
+				</div>-->
+		
 
 			<div id="box">
 					<div class="box-top">DEMO SCATTERPLOT</div>
 					<div class="box-panel-growth">
-					<!--<script type="text/javascript" src="/iligrowth.js"></script>-->
-					<script type="text/javascript" src="/iligrowth_angular.js"></script>
+					<script type="text/javascript" src="/iligrowth.js"></script>
+					<!--<script type="text/javascript" src="/iligrowth2.js"></script>-->
 					</div>
 			</div>
-			</div>
+			
+		</div>
+	</div>
 	</body>
 </html>

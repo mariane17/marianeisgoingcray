@@ -1,6 +1,6 @@
 console.log('THIS IS ILIGROWTH.JS')	  
 	  
-	  var outerWidth = 900;
+      var outerWidth = 900;
       var outerHeight = 400;
       var border = 1;
       var bordercolor = 'black';
@@ -86,7 +86,15 @@ console.log('THIS IS ILIGROWTH.JS')
 
         circles.exit().remove();
       }
-
+      var url = "https://marianeisgoingcray.mybluemix.net/select";	//URL to read ILI data
+      d3.json(url, render, function(data){
+      console.log(data);
+      data.forEach(function(d) {
+      	d.ABSOLUTE_ODOMETER_m = +d.ABSOLUTE_ODOMETER_m; //x
+        d.MAX_DEPTH_PCT = +d.MAX_DEPTH_PCT; 
+         	});
+      });
+/*
       function type(d){
         d.ABSOLUTE_ODOMETER_m = +d.ABSOLUTE_ODOMETER_m; //x
         //d.sepal_width  = +d.sepal_width; 
@@ -96,4 +104,4 @@ console.log('THIS IS ILIGROWTH.JS')
       }
 
       d3.csv("ILI_Data_Sample.csv", type, render);
-      
+ */     

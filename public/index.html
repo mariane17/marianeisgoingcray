@@ -33,10 +33,28 @@
 			<p>Testing out map for all pipe and ILI sections</p>
 		</div>
 
-			<div id="box">
+			<div id="box" ng-app="myILI" ng-controller="ili_controller">
 					<div class="box-top">DERP DERP INDEX NOT WORKING</div>
 					<div class="box-panel">
-wtfwtfwtf
+		<!--	<script type="text/javascript">console.log('testing angular http json parse')
+var myILIapp = angular.module('myILI',[]);
+
+myILIapp.controller('ili_controller',function($scope,$http){
+	$http.get('https://marianeisgoingcray.mybluemix.net/select', function(response){
+			 var body = '';
+
+			  response.on('data', function(chunk) {
+			    body += chunk;
+			  });
+			
+			  response.on('end', function() {
+			    $scope.data = JSON.parse(body);
+			  });
+		});
+	});
+	console.log(data);
+			</script>-->
+			
 					</div>
 			</div>
 			</div>
