@@ -40,8 +40,8 @@ app.get('/select', function(req, res) {
       return;
     } 
    	console.log("**********CONNECTING TO DATABASE**********");
-   	
-      var query = "SELECT MAX_DEPTH_PCT, \"ABSOLUTE_ODOMETER_m\" FROM '+ilisection+'";	//SELECT MAX_DEPTH_PCT, \"ABSOLUTE_ODOMETER_m\" FROM CAPSTONE_ILI_DATA_SAMPLE FETCH FIRST 5 ROWS ONLY
+   										// '+ilisection+'
+      var query = "SELECT MAX_DEPTH_PCT, \"ABSOLUTE_ODOMETER_m\" FROM CAPSTONE_ILI_DATA_SAMPLE";	//SELECT MAX_DEPTH_PCT, \"ABSOLUTE_ODOMETER_m\" FROM CAPSTONE_ILI_DATA_SAMPLE FETCH FIRST 5 ROWS ONLY
       conn.query(query, function(err, rows) {
         if (err) {
           console.log("Error: ", err);
