@@ -13,7 +13,8 @@ var express = require('express');
 var cfenv = require('cfenv');
 
 // create a new express server
-var app = express()
+var app = express();
+var router = express.Router();
 
 // serve the files out of ./public as our main files
 app.use(express.static(__dirname + '/public'));
@@ -28,6 +29,7 @@ app.listen(appEnv.port, '0.0.0.0', function() {
 });
 
 var ibmdb = require('ibm_db');
+var ilisection = '';
 
 global.dbConnString = "DATABASE=BLUDB;HOSTNAME=dashdb-entry-yp-dal09-07.services.dal.bluemix.net;PORT=50000;PROTOCOL=TCPIP;UID=dash11481;PWD=09ee0b8b23de;"
 
@@ -39,7 +41,7 @@ app.get('/select', function(req, res) {
     } 
    	console.log("**********CONNECTING TO DATABASE**********");
    	
-      var query = "SELECT MAX_DEPTH_PCT, \"ABSOLUTE_ODOMETER_m\" FROM {$table} CAPSTONE_ILI_DATA_SAMPLE";	//SELECT MAX_DEPTH_PCT, \"ABSOLUTE_ODOMETER_m\" FROM CAPSTONE_ILI_DATA_SAMPLE FETCH FIRST 5 ROWS ONLY
+      var query = "SELECT MAX_DEPTH_PCT, \"ABSOLUTE_ODOMETER_m\" FROM '+ilisection+'";	//SELECT MAX_DEPTH_PCT, \"ABSOLUTE_ODOMETER_m\" FROM CAPSTONE_ILI_DATA_SAMPLE FETCH FIRST 5 ROWS ONLY
       conn.query(query, function(err, rows) {
         if (err) {
           console.log("Error: ", err);
@@ -56,10 +58,13 @@ app.get('/select', function(req, res) {
     });
   });
 
+ 
+app.post('/', function (req,res){
+	ilisection = req.body.ilisection;
+	console.log(ilisection);
+	res.render('index.html');
+})
 
-app.get('/index',function(req,res){
-res.sendfile('dashboard.html');
-});
 
 app.get('/riskmgt',function(req,res){
 res.sendfile('riskmgt.html');
