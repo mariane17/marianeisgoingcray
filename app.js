@@ -40,19 +40,47 @@ app.get('/select', function(req, res) {
       return;
     } 
    	console.log("**********CONNECTING TO DATABASE**********");
-   										// '+ilisection+'
+   								// '+ilisection+'
       var query = "SELECT MAX_DEPTH_PCT, \"ABSOLUTE_ODOMETER_m\" FROM CAPSTONE_ILI_DATA_SAMPLE";	//SELECT MAX_DEPTH_PCT, \"ABSOLUTE_ODOMETER_m\" FROM CAPSTONE_ILI_DATA_SAMPLE FETCH FIRST 5 ROWS ONLY
       conn.query(query, function(err, rows) {
         if (err) {
           console.log("Error: ", err);
           return;
         } 
+        var data = rows;
           //console.log(JSON.parse(rows));
-          res.end(JSON.stringify(rows));
+          res.end(JSON.stringify(data));
          
-         conn.close(function() {
-            console.log("Connection closed successfully.");
-          });
+      conn.close(function() {
+         console.log("**********Connection closed successfully.**********");
+         });
+        
+      });
+    });
+  });
+
+
+app.get('/select_input', function(req, res) {
+  ibmdb.open(dbConnString, function(err, conn) {
+    if (err) {
+      console.error("Error: ", err);
+      return;
+    } 
+   	console.log("**********CONNECTING TO DATABASE**********");
+   								// '+ilisection+'
+      var query = "SELECT MAX_DEPTH_PCT, \"ABSOLUTE_ODOMETER_m\" FROM '+ilisection+'";	//SELECT MAX_DEPTH_PCT, \"ABSOLUTE_ODOMETER_m\" FROM CAPSTONE_ILI_DATA_SAMPLE FETCH FIRST 5 ROWS ONLY
+      conn.query(query, function(err, rows) {
+        if (err) {
+          console.log("Error: ", err);
+          return;
+        } 
+        var data = rows;
+          //console.log(JSON.parse(rows));
+          res.end(JSON.stringify(data));
+         
+      conn.close(function() {
+         console.log("**********Connection closed successfully.**********");
+         });
         
       });
     });
