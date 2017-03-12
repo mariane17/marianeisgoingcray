@@ -67,7 +67,7 @@ console.log('THIS IS ILIGROWTH.JS')
         .ticks(5)
         .tickFormat(d3.format(".0%"))
         .outerTickSize(0);
-
+        
       function render(data){
         xScale.domain(d3.extent(data, function (d){ return d.ABSOLUTE_ODOMETER_m; }));
         yScale.domain(d3.extent(data, function (d){ return d.MAX_DEPTH_PCT; }));
