@@ -69,7 +69,7 @@ app.post('/ilisection_post', function(req, res) {
     if (err) {
       console.error("Error: ", err);
       return;
-    } else {
+    } 
       var iliSectionName = req.body.ilisection;
       var query = "SELECT ABSOLUTE_ODOMETER_m, MAX_DEPTH_PCT FROM " + iliSectionName;
       console.log("iliSectionName: " + iliSectionName);
@@ -78,15 +78,15 @@ app.post('/ilisection_post', function(req, res) {
         if (err) {
           console.log("Error: ", err);
           return;
-        } else {
+        } 
         	var data = rows;
           res.send(data);
           conn.close(function() {
             console.log("Connection closed successfully.");
           });
-        }
+        
       });
-    }
+    
   });
 });
 
