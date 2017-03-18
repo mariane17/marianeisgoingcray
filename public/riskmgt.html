@@ -1,53 +1,94 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>InSite Dashboard</title>
-	
-    <link rel="stylesheet" href="stylesheets/dashstyle.css">
-    <!--<script src="scripts/jquery-3.1.1.min.js"></script>
-	<script src="scripts/mobilemenu.js"></script>
-	<script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>-->
- <script src="//d3js.org/d3.v3.min.js"></script>
- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js">	
-</script>
- 
-
+    <title>InSite Risk Management</title>
+    <meta name="viewport" content="width=device-width, initial-scale: 1.0, user-scalable=0">
+    <link rel="stylesheet" href="stylesheets/riskmgt_style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--script(src='//d3js.org/d3.v3.min.js')-->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    <script type="text/javascript" src="/printme.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js">    </script>
   </head>
-
-	<body>
-		<div id="header">
-			<div class="logo"><img class="binoculars" src="images/binoculars.png"><a href="#"><span>In</span>Site</a></div>
-		</div>
-		
-	<a class="mobile" href="#">MENU</a>
-	
-	
-	<div id="container">
-		<div class="sidebar">
-			<ul id="nav">
-				<li><a class="selected" href="dashboard.html">Dashboard</a></li>
-				<li><a href="newfile.html">New Analysis</a></li>
-				<li><a href="riskmgt.html">Risk Management</a></li>
-				<li><a href="logout.html">Logout</a></li>
-			</ul>
-		</div>
-		<div class="content" ng-app="readILI" ng-controller = "iliCtrl">
-		<script type="text/javascript" src="/angularapp.js"></script>
-			 <h1>DATA READ DEMO</h1>
-				<!--<div class="row" ng-repeat="data in ilidata">
-				<p>I am reading MAX DEPTH: {{data.MAX_DEPTH_PCT}} and ABSOLUTE DISTANCE: {{data.ABSOLUTE_ODOMETER_m}}</p>
-				</div>-->
-		
-
-			<div id="box">
-					<div class="box-top">DEMO SCATTERPLOT</div>
-					<div class="box-panel-growth">
-					<script type="text/javascript" src="/iligrowth.js"></script>
-					<!--<script type="text/javascript" src="/iligrowth2.js"></script>-->
-					</div>
-			</div>
-			
-		</div>
-	</div>
-	</body>
+  <body>
+    <ul>
+      <li class="dropdown"><i class="material-icons" style="font-size:40px;color:white">menu</i>
+        <div class="dropdown-content"><a href="/">Dashboard</a><a href="newfile">New Analysis</a><a href="riskmgt">Risk Management</a><a href="logout">Log Out</a></div>
+      </li>
+      <li class="home"><a href="/">InSite</a></li>
+    </ul>
+    <div id="container">
+      <div class="content">
+        <h1>< ili### > Risk Management</h1>
+      </div>
+      <div id="box">
+        <div class="box-top">DEMO SINGLE ILI SECTION MAP</div>
+        <div class="box-panel-map">
+          <script src="//maps.google.com/maps/api/js?sensor=true"></script>
+          <script src="/d3-tip.js"></script>
+          <!--script(type='text/javascript', src='/pipemap.js')-->
+          <script type="text/javascript" src="/ilimap.js"></script>
+        </div>
+      </div>
+      <div id="box">
+        <div class="box-top">CRITICALITY TABLE OF SINGLE ILI SECTION</div>
+        <div class="box-panel">
+          <table>
+            <tr>
+              <th>Feature Type</th>
+              <th>Corrosion</th>
+              <th>RPR</th>
+              <th>Dent</th>
+              <th>Comment</th>
+            </tr>
+            <tr>
+              <td>GWD1</td>
+              <td>0</td>
+              <td>0</td>
+              <td>1</td>
+              <td>There is a dent!</td>
+            </tr>
+            <tr>
+              <td>GWD1</td>
+              <td>0</td>
+              <td>1</td>
+              <td>0</td>
+              <td>What is an RPR?!</td>
+            </tr>
+            <tr>
+              <td>GWD1</td>
+              <td>1</td>
+              <td>0</td>
+              <td>0</td>
+              <td>There is metal loss!</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div id="boxscatter">
+        <div class="boxscatter-top">DEMO SCATTERPLOT</div>
+        <div class="boxscatter-panel">
+          <script src="/d3-tip.js"></script>
+          <script type="text/javascript" src="scatter.js"></script>
+          <!--script(type='text/javascript', src='testing.js')--> 
+          <p>
+            <input type="button" onclick="printDiv('boxscatter')" value="Print!">
+          </p>
+        </div>
+      </div>
+      <div id="boxinfo">
+        <div class="boxinfo-top">Key Information (Maybe)</div>
+        <div class="boxinfo-panel">Inspected or not?
+          <p></p>Critical or not?
+          <p></p>Date of last dig
+          <p></p>Flagged Feature: i.e. leak or rupture or growth analysis
+          <p></p>Girth Weld
+          <p></p>Rupture Pressure Ratio
+          <p>
+            <input type="button" onclick="printDiv('container')" value="Print!">
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

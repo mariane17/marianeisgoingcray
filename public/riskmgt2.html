@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>InSite Dashboard</title>
+	
+    <link rel="stylesheet" href="stylesheets/dashstyle.css">
+    <!--<script src="scripts/jquery-3.1.1.min.js"></script>
+	<script src="scripts/mobilemenu.js"></script>
+	<script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>-->
+ <script src="//d3js.org/d3.v3.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.17/angular.min.js">	
+</script>
+ 
+
+  </head>
+
+	<body>
+		<div id="header">
+			<div class="logo"><img class="binoculars" src="images/binoculars.png"><a href="#"><span>In</span>Site</a></div>
+		</div>
+		
+	<a class="mobile" href="#">MENU</a>
+	
+	
+	<div id="container">
+		<div class="sidebar">
+			<ul id="nav">
+				<li><a class="selected" href="dashboard.html">Dashboard</a></li>
+				<li><a href="newfile.html">New Analysis</a></li>
+				<li><a href="riskmgt.html">Risk Management</a></li>
+				<li><a href="logout.html">Logout</a></li>
+			</ul>
+		</div>
+		<div class="content" ng-app="readILI" ng-controller = "iliCtrl">
+		<script type="text/javascript" src="/angularapp.js"></script>
+			 <h1>DATA READ DEMO</h1>
+				<!--<div class="row" ng-repeat="data in ilidata">
+				<p>I am reading MAX DEPTH: {{data.MAX_DEPTH_PCT}} and ABSOLUTE DISTANCE: {{data.ABSOLUTE_ODOMETER_m}}</p>
+				</div>-->
+		
+
+			<div id="box">
+					<div class="box-top">DEMO SCATTERPLOT</div>
+					<div class="box-panel-growth">
+					<script type="text/javascript" src="/scatter.js"></script>
+					<!--<script type="text/javascript" src="/iligrowth2.js"></script>-->
+					</div>
+			</div>
+			
+		</div>
+	</div>
+	</body>
+</html>

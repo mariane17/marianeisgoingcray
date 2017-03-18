@@ -33,6 +33,66 @@ var ilisection = '';
 
 global.dbConnString = "DATABASE=BLUDB;HOSTNAME=dashdb-entry-yp-dal09-07.services.dal.bluemix.net;PORT=50000;PROTOCOL=TCPIP;UID=dash11481;PWD=09ee0b8b23de;"
 
+app.get('/select_scatter',function(req, res) {
+  ibmdb.open(dbConnString, function(err, conn) {
+    if (err) {
+      console.error("Error: ", err);
+      return;
+    } 
+   	console.log("**********CONNECTING TO DATABASE**********");
+      //var query = "SELECT MAX_DEPTH_PCT, \"ABSOLUTE_ODOMETER_m\" FROM CAPSTONE_ILI_DATA_SAMPLE";	//SELECT MAX_DEPTH_PCT, \"ABSOLUTE_ODOMETER_m\" FROM CAPSTONE_ILI_DATA_SAMPLE FETCH FIRST 5 ROWS ONLY
+      //var query = "SELECT FEATURE_NUMBER, LATITUDE, LONGITUDE, GFLAG, COMMENTS FROM SPSS_OUTPUT_TABLE ORDER BY FEATURE_NUMBER DESC"; //for map only   
+      var query = "SELECT * FROM SPSS_OUTPUT_TABLE WHERE FEATURE_NUMBER LIKE 'CLS%' OR FEATURE_NUMBER LIKE 'DMA%' OR INT_EXT = 'External' OR DEPTH____WT_ >= 0.10 OR DEPTH____WT_ IS NOT NULL OR CLUSTER_NUMBER IS NOT NULL";
+      conn.query(query, function(err, rows) {
+        if (err) {
+          console.log("Error: ", err);
+          return;
+        } 
+
+        var data = rows;
+         // console.log(JSON.parse(rows));
+        res.end(JSON.stringify(data)); 
+
+      conn.close(function() {
+         console.log("**********Connection closed successfully.**********");
+         });
+        
+      });
+    });
+});
+
+app.get('/select_single_map', function(req, res) {
+  ibmdb.open(dbConnString, function(err, conn) {
+    if (err) {
+      console.error("Error: ", err);
+      return;
+    } 
+   	console.log("**********CONNECTING TO DATABASE**********");
+      //var query = "SELECT MAX_DEPTH_PCT, \"ABSOLUTE_ODOMETER_m\" FROM CAPSTONE_ILI_DATA_SAMPLE";	//SELECT MAX_DEPTH_PCT, \"ABSOLUTE_ODOMETER_m\" FROM CAPSTONE_ILI_DATA_SAMPLE FETCH FIRST 5 ROWS ONLY
+      //var query = "SELECT FEATURE_NUMBER, LATITUDE, LONGITUDE, GFLAG, COMMENTS FROM SPSS_OUTPUT_TABLE ORDER BY FEATURE_NUMBER DESC"; //for map only   
+      var query = "SELECT FEATURE_NUMBER, LAT___DEG_DEC_NAD_83_, LONG___DEG_DEC_NAD_83___UTM_ZONE_11_, GFLAG, COMMENTS FROM SPSS_OUTPUT_TABLE WHERE FEATURE_NUMBER IS NOT NULL ORDER BY LAT___DEG_DEC_NAD_83_";
+      conn.query(query, function(err, rows) {
+        if (err) {
+          console.log("Error: ", err);
+          return;
+        } 
+        var data = rows;
+         // console.log(JSON.parse(rows));
+        res.end(JSON.stringify(data)); 
+      conn.close(function() {
+         console.log("**********Connection closed successfully.**********");
+         });
+        
+      });
+    });
+});
+
+
+
+
+
+
+
 app.get('/select', function(req, res) {
   ibmdb.open(dbConnString, function(err, conn) {
     if (err) {
