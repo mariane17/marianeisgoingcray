@@ -87,10 +87,38 @@ app.get('/select_single_map', function(req, res) {
     });
 });
 
+app.get('/select_flags', function(req, res) {
+  ibmdb.open(dbConnString, function(err, conn) {
+    if (err) {
+      console.error("Error: ", err);
+      return;
+    } 
+   	console.log("**********CONNECTING TO DATABASE**********");
+      var query = "SELECT FEATURE_NUMBER, FEATURE_TYPE, FEATURE_COMMENT, RPR, CORROSION, DENT, COMMENTS FROM SPSS_OUTPUT_TABLE WHERE FEATURE_NUMBER IS NOT NULL AND (FEATURE_NUMBER LIKE 'CLS%' OR FEATURE_NUMBER LIKE 'DMA%' OR FEATURE_NUMBER LIKE 'DNT%') ORDER BY FEATURE_NUMBER";
+      conn.query(query, function(err, rows) {
+        if (err) {
+          console.log("Error: ", err);
+          return;
+        } 
+        var data = rows;
+         // console.log(JSON.parse(rows));
+        res.end(JSON.stringify(data)); 
+      conn.close(function() {
+         console.log("**********Connection closed successfully.**********");
+         });
+        
+      });
+    });
+});
 
 
 
 
+
+
+
+
+/**************************************************************************************/
 
 
 app.get('/select', function(req, res) {
