@@ -1,5 +1,11 @@
-/* source: http://bl.ocks.org/jfreels/6734025*/
+/* source table: http://bl.ocks.org/jfreels/6734025
+ * source for table sort: http://bl.ocks.org/AMDS/4a61497182b8fcb05906
+*/
 console.log('RUNNING FLAGTABLE.JS');
+
+
+
+
 
 var url = "https://marianeisgoingcray.mybluemix.net/select_flags";
 
@@ -10,12 +16,26 @@ d3.json(url, function (error,data) {
         var thead = table.append('thead');
         var tbody = table.append('tbody');
 
+		var sortAscending = true;
         // append the header row
         thead.append('tr')
           .selectAll('th')
           .data(columns).enter()
           .append('th')
-            .text(function (column) { return column; });
+            .text(function (column) { return column; })
+            	.on('click', function (d) {
+		                	   thead.attr('class', 'header');
+		                	   if (sortAscending) {
+		                	     rows.sort(function(a, b) { return b[d] < a[d]; });
+		                	     sortAscending = false;
+		                	     this.className = 'aes';
+		                	   } else {
+		                		 rows.sort(function(a, b) { return b[d] > a[d]; });
+		                		 sortAscending = true;
+		                		 this.className = 'des';
+		                	   }
+		                	   
+		                   });
 
         // create a row for each object in the data
         var rows = tbody.selectAll('tr')

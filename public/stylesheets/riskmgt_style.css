@@ -321,8 +321,20 @@ td, th {
     text-align: center;
     padding: 7px;
     width: 40px;
+    
 }
 
+th {
+	cursor: s-resize;
+}
+
+th.des:after {
+	content: "\21E9";
+}
+  
+th.aes:after {
+    content: "\21E7";
+}
 tr:nth-child(even) {
     background-color: #dddddd;
 }
