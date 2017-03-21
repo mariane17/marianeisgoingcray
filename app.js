@@ -14,7 +14,6 @@ var cfenv = require('cfenv');
 
 // create a new express server
 var app = express();
-var router = express.Router();
 
 // serve the files out of ./public as our main files
 app.use(express.static(__dirname + '/public'));
@@ -28,8 +27,14 @@ app.listen(appEnv.port, '0.0.0.0', function() {
   console.log("server starting on " + appEnv.url);
 });
 
+var bodyParser = require('body-parser')
+app.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: true
+})); 
+
+
 var ibmdb = require('ibm_db');
-var ilisection = '';
 
 global.dbConnString = "DATABASE=BLUDB;HOSTNAME=dashdb-entry-yp-dal09-07.services.dal.bluemix.net;PORT=50000;PROTOCOL=TCPIP;UID=dash11481;PWD=09ee0b8b23de;"
 
@@ -147,39 +152,31 @@ app.get('/select', function(req, res) {
     });
   });
 
-
-app.get('/select_input', function(req, res) {
+app.post('/ilisection_post', function(req, res) {
   ibmdb.open(dbConnString, function(err, conn) {
     if (err) {
       console.error("Error: ", err);
       return;
     } 
-   	console.log("**********CONNECTING TO DATABASE**********");
-   								// '+ilisection+'
-      var query = "SELECT MAX_DEPTH_PCT, \"ABSOLUTE_ODOMETER_m\" FROM '+ilisection+'";	//SELECT MAX_DEPTH_PCT, \"ABSOLUTE_ODOMETER_m\" FROM CAPSTONE_ILI_DATA_SAMPLE FETCH FIRST 5 ROWS ONLY
+      var iliSectionName = req.body.ilisection;
+      var query = "SELECT ABSOLUTE_ODOMETER_m, MAX_DEPTH_PCT FROM " + iliSectionName;
+      console.log("iliSectionName: " + iliSectionName);
+      console.log("query: " + query);
       conn.query(query, function(err, rows) {
         if (err) {
           console.log("Error: ", err);
           return;
         } 
-        var data = rows;
-          //console.log(JSON.parse(rows));
-          res.end(JSON.stringify(data));
-         
-      conn.close(function() {
-         console.log("**********Connection closed successfully.**********");
-         });
+        	var data = rows;
+          res.send(data);
+          conn.close(function() {
+            console.log("Connection closed successfully.");
+          });
         
       });
-    });
+    
   });
-
- 
-app.post('/', function (req,res){
-	ilisection = req.body.ilisection;
-	console.log(ilisection);
-	res.render('index.html');
-})
+});
 
 
 app.get('/riskmgt',function(req,res){

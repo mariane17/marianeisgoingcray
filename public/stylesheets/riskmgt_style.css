@@ -297,6 +297,18 @@ select {
 
 /* Table */
 
+tableInput {
+    background-image: url('/css/searchicon.png'); /* Add a search icon to input */
+    background-position: 10px 12px; /* Position the search icon */
+    background-repeat: no-repeat; /* Do not repeat the icon image */
+    width: 100%; /* Full-width */
+    font-size: 16px; /* Increase font-size */
+    padding: 12px 20px 12px 40px; /* Add some padding */
+    border: 1px solid #ddd; /* Add a grey border */
+    margin-bottom: 12px; /* Add some space below the input */
+}
+
+
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
@@ -305,8 +317,10 @@ table {
 
 td, th {
     border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
+	font-size:	12px;
+    text-align: center;
+    padding: 7px;
+    width: 40px;
 }
 
 tr:nth-child(even) {
