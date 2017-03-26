@@ -39,7 +39,12 @@ var svg = d3.select(".boxscatter-panel").append("svg")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 // add the tooltip area to the webpage
-var tooltip = d3.select("boxscatter-panel").append("div")
+/*var tooltip = d3.select("boxscatter-panel").append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);*/
+
+var tooltip = d3.select("body")
+    .append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
 
@@ -95,10 +100,12 @@ d3.json(url, function(error, data) {
       .data(data.filter(function(d){ return d.DEPTH >=  0.1; }))
     .enter().append("circle")
       .attr("class", "dot")
-      .attr("r", 3.5)
+      .attr("r", 4)
       .attr("cx", xMap)
       .attr("cy", yMap)
  //     .style("fill", function(d) { return color(cValue(d));}) 
+      .style("fill", "236, 240, 241")
+      	.style("opacity",0.5)
       .on("mouseover", function(d) {
           tooltip.transition()
                .duration(200)

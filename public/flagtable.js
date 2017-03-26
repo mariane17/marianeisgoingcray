@@ -3,39 +3,36 @@
 */
 console.log('RUNNING FLAGTABLE.JS');
 
-
-
-
-
+//var url = "https://marianeisgoingcray.mybluemix.net/select_flags";
 var url = "https://marianeisgoingcray.mybluemix.net/select_flags";
 
+var data = [];
+
 d3.json(url, function (error,data) {
-
-  function tabulate(data, columns) {
-        var table = d3.select('.boxflags-panel').append('table');
-        var thead = table.append('thead');
-        var tbody = table.append('tbody');
-
-		var sortAscending = true;
-        // append the header row
+       var table = d3.select('.boxflags-panel').append('table');
+       var thead = table.append('thead');
+       var tbody = table.append('tbody');
+       var sortAscending = true;
+       
+ function tabulate(data, columns) {
+  // append the header row
         thead.append('tr')
           .selectAll('th')
           .data(columns).enter()
           .append('th')
             .text(function (column) { return column; })
             	.on('click', function (d) {
-		                	   thead.attr('class', 'header');
-		                	   if (sortAscending) {
-		                	     rows.sort(function(a, b) { return b[d] < a[d]; });
-		                	     sortAscending = false;
-		                	     this.className = 'aes';
-		                	   } else {
-		                		 rows.sort(function(a, b) { return b[d] > a[d]; });
-		                		 sortAscending = true;
-		                		 this.className = 'des';
-		                	   }
-		                	   
-		                   });
+		            thead.attr('class', 'header');
+		            if (sortAscending) {
+		                 rows.sort(function(a, b) { return b[d] < a[d]; });
+		                 sortAscending = false;
+		                 this.className = 'aes';
+		            } else {
+		              	 rows.sort(function(a, b) { return b[d] > a[d]; });
+		              	 sortAscending = true;
+		              	 this.className = 'des';
+		            }
+		            });
 
         // create a row for each object in the data
         var rows = tbody.selectAll('tr')
@@ -55,16 +52,54 @@ d3.json(url, function (error,data) {
 			.text(function (d) { if (d.value !== 1 && d.value !== 0) return d.value;});
 			
 			// add the imges when the value is 0 or 1
-			cells.filter(function(d) { return (d.value === 1 || d.value ===0); })
+			cells.filter(function(d) { return d.value === 1 || d.value ===0; })
 			.append('img')
 			.attr("src", function(d) {
 			      return d.value===1 ? "images/error.png":"images/success.png";
-			});      
+			});	
 
+	var x = d3.select("#myCheckbox").on("change",update);
+	console.log(x);
+	//update();
+	function update(){
+		if(d3.select("#myCheckbox").property("checked")){
+			newData = data.filter(function(d){
+					//console.log(d.DENT);
+					return d.DENT !== 0 || d.RPR !== 0 || d.CORROSION !== 0;
+					});
+		} else {
+			newData = data;			
+		}	
+		//console.log(newData);
+		newRows = tbody.selectAll("tr")
+			.data(newData)
+			.enter()
+			.append("tr");
+			
+		newCells = newRows.selectAll('td')
+			.data(function (row) {
+			       return columns.map(function (column) {
+			            return {column: column, value: row[column]};
+			       });
+			})
+			.enter()
+			.append('td')
+			.text(function (d) { if (d.value !== 1 && d.value !== 0) return d.value;});
+	
+		// add the imges when the value is 0 or 1
+			newCells.filter(function(d) { return d.value === 1 || d.value === 0; })
+			.append('img')
+			.attr("src", function(d) {
+			      return d.value===1 ? "images/error.png":"images/success.png";
+				});			
+			newCells.exit()
+			.remove();			
+	}
+	
+			
       return table;
     }
     // render the table(s)
     tabulate(data, ['FEATURE_NUMBER', 'FEATURE_TYPE', 'FEATURE_COMMENT', 'RPR', 'CORROSION', 'DENT', 'COMMENTS']); // 5 column table
-
 
 }); 

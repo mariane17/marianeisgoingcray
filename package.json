@@ -13,7 +13,8 @@
     "jsdom": "^3.1.2",
     "ibm_db": "*",
     "angular": "*",
-    "body-parser":"*"
+    "body-parser":"*",
+    "mysql": "*"
 	},
 	"repository": {},
 	"engines": {

@@ -32,7 +32,7 @@ d3.json("pipes.json", function(data) {
         .domain([0, 1])
         .range(["blue", "red"]);   
                   
-	  var tooltip = d3.select("body")
+      var tooltip = d3.select("body")
         .append("div")
     	.attr("class", "tooltip")
     	.style("opacity", 0);

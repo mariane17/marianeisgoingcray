@@ -1,5 +1,5 @@
 var map = new google.maps.Map(d3.select(".box-panel-map").node(), {
-  zoom: 15,
+  zoom: 12,
   draggableCursor: 'crosshair',
   center: new google.maps.LatLng(54.52936037,-117.46484254),
   mapTypeId: google.maps.MapTypeId.TERRAIN,
@@ -18,9 +18,8 @@ var url ="https://marianeisgoingcray.mybluemix.net/select_single_map";
 
 d3.json(url, function(data) {
   data.forEach(function(d){
-  	    d.LAT= +d.LAT___DEG_DEC_NAD_83_; 
+  	d.LAT= +d.LAT___DEG_DEC_NAD_83_; 
         d.LONG = +d.LONG___DEG_DEC_NAD_83___UTM_ZONE_11_;
-        
         })
 
      // console.log(data);
@@ -28,16 +27,16 @@ d3.json(url, function(data) {
 
   // Add the container when the overlay is added to the map.
   overlay.onAdd = function() {
-    var layer = d3.select(this.getPanes().overlayMouseTarget).append("div")
+      var layer = d3.select(this.getPanes().overlayMouseTarget).append("div")
       .attr("class", "pipemap");
                             
     // Draw each marker as a separate SVG element.
-    overlay.draw = function() {
+      overlay.draw = function() {
     	 
       var projection = this.getProjection(),
         padding = 10;
 
-	  var tooltip = d3.select("body")
+      var tooltip = d3.select("body")
         .append("div")
     	.attr("class", "tooltip")
     	.style("opacity", 0);
@@ -55,7 +54,7 @@ d3.json(url, function(data) {
         .attr("r", function(d) {
         	var radius;
                          if (d.value.GFLAG === 0) { radius = 3;
-                         } else if (d.value.GFLAG === 1) { radius = 6; }
+                         } else if (d.value.GFLAG === 1) { radius = 9; }
                          return radius;
                        })
         .attr("cx", padding)
