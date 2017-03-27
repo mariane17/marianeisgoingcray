@@ -173,8 +173,8 @@ app.get('/select_full_map', function(req, res) {
       return;
     } 
    	console.log("**********CONNECTING TO DATABASE**********");
-      var query = "SELECT * FROM ILI_NAMES";
-      conn.query(query, function(err, rows) {
+      var query4names = "SELECT * FROM ILI_NAMES";
+      conn.query(query4names, function(err, rows) {
         if (err) {
           console.log("Error: ", err);
           return;
@@ -190,11 +190,51 @@ app.get('/select_full_map', function(req, res) {
       
 // http://stackoverflow.com/questions/15533905/cannot-response-write-on-connection-node-js      
       function queryAll(tableName, numTables){
-      	for (var i = 0; i < numTables; i++) {
+      	
+      	var i = 0;
+      	var query = "";
+      	var allData = "";
+      	
+      	while (i < numTables){
+      		query = "SELECT FEATURE_NUMBER, LAT___DEG_DEC_NAD_83_, LONG___DEG_DEC_NAD_83___UTM_ZONE_11_, GFLAG, COMMENTS FROM " + tableName[i].ILI_SECTION_NAME + " WHERE FEATURE_NUMBER IS NOT NULL ORDER BY LAT___DEG_DEC_NAD_83_";
+      		allData += getRows(query,i);
+      		console.log ('NUMBER OF ROWS IN ALL DATA: ' + allData.length);
+      		i++;      		
+      	}
+		console.log ('NUMBER OF ROWS IN ALL DATA: ' + allData.length);
+		//res.end(JSON.stringify(allData)); 
+	  }
+
+	  function getRows (query, i){
+	  	var tableData = "";
+				conn.query(query, function(err, rows) {
+				      if (err) {
+					    console.log("Error: ", err);
+			        	return;}
+			    	//console.log('***READING SINGLE TABLE DATA FROM QUERY: ' + query + '***');
+			        tableData = rows;
+			        console.log ('NUMBER OF ROWS IN SINGLE TABLE DATA: ' + tableData.length);
+			        //console.log(tableData);
+					conn.close(function() {console.log("***END READ SINGLE TABLE***");});
+				});
+				
+		return tableData;
+	   }
+
+  });  
+});
+
+
+
+
+
+
+
+/*      	for (var i = 0; i < numTables; i++) {
         	//console.log('Testing for loop...');
         	console.log(tableName[i].ILI_SECTION_NAME);
         }
-/*      var query = "";
+      var query = "";
       	conn.query(query, function(err, rows) {
       		if (err) {throw err;
       		} else
@@ -213,10 +253,15 @@ app.get('/select_full_map', function(req, res) {
   		  	res.end();
 		});
 */		
-	  }
-	  
-	});
-  });
+
+
+
+
+
+
+
+
+
 
 
 
